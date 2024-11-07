@@ -2,6 +2,8 @@ import Bali from "../assets/images/Bali.jpg";
 import Bromo from "../assets/images/Bromo.jpg";
 import Borobudur from "../assets/images/Borobudur.jpg";
 import Rinjani from "../assets/images/Rinjani.jpg";
+import Dieng from "../assets/images/Dieng.jpg";
+import Ubud from "../assets/images/Ubud.jpg";
 
 const data = [
   {
@@ -36,6 +38,22 @@ const data = [
     price: "6.000.000",
     img: Rinjani,
   },
+  {
+    id: 5,
+    title: "Dieng",
+    desc: "Mount Dieng",
+    location: "Central Java",
+    price: "5.000.000",
+    img: Dieng,
+  },
+  {
+    id: 6,
+    title: "Ubud",
+    desc: "Mount Ubud",
+    location: "Bali",
+    price: "4.500.000",
+    img: Ubud,
+  },
 ];
 
 const HeroCard = () => {
@@ -52,18 +70,18 @@ const HeroCard = () => {
             alt={item.title}
             className="rounded-2xl w-full h-full object-cover"
           />
-          <div>
-            <p className="z-10 absolute bottom-[75px] left-[10px] md:bottom-[90px] md:left-[30px] text-white text-xs md:text-[32px] tracking-wide">
+          <div className="absolute flex flex-col md:gap-2 z-10 bottom-5 left-[10px] md:bottom-10 md:left-[30px]">
+            <p className="text-white text-xs md:text-[32px] tracking-wide">
               {item.desc}
             </p>
-            <p className="z-10 absolute bottom-[60px] left-[10px] md:left-[30px] text-white text-xs text-[32px] tracking-wide">
+            <p className="text-white text-xs md:text-[24px] tracking-wide md:mt-2">
               at {item.location}
             </p>
-            <p className="z-10 absolute bottom-[40px] left-[10px] md:left-[30px] text-white text-xs md:text-sm">
+            <p className="text-white text-xs md:text-sm">
               Start from IDR {item.price}
             </p>
           </div>
-          <button className="z-10 absolute bg-[#1F4AA8] md:w-[222px] md:h-[50px] rounded-sm bottom-[45px] right-[30px] p-1 text-white text-xs md:text-[18px]">
+          <button className="z-10 absolute bg-[#1F4AA8] md:w-[222px] md:h-[50px] rounded-sm bottom-5 md:bottom-10 right-[10px] md:right-[30px] p-1 text-white text-xs md:text-[18px]">
             Make a Reservation
           </button>
         </div>
