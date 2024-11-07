@@ -59,7 +59,7 @@ const data = [
 const Popular = () => {
   return (
     <>
-      <div className="w-full h-auto md:h-screen bg-[#F1F5FA] pl-[10px] pt-4 mx-auto container">
+      <div className="w-full h-auto md:h-screen bg-[#F1F5FA] pt-4 mx-auto container">
         <div className="flex flex-row justify-between md:py-10 md:px-[140px]">
           <div className="mr-4 hidden md:block">
             <h1 className="text-[32px] fonnt-semibold w-[247px]">
@@ -156,8 +156,8 @@ const Popular = () => {
               </div>
             </div>
           </div>
-          <div className="ml-4">
-            <div className="relative w-[289px] h-[580px] rounded-[16px] hidden md:block">
+          <div className="md:ml-4 hidden md:block">
+            <div className="relative w-[289px] h-[580px] rounded-[16px]">
               <div className="absolute rounded-[16px] w-full h-full bg-gradient-to-t from-black to-transparent opacity-60" />
               <img
                 src={data[4].img}
