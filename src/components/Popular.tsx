@@ -59,7 +59,7 @@ const data = [
 const Popular = () => {
   return (
     <>
-      <div className="w-full h-auto md:h-screen bg-[#F1F5FA] pt-4 mx-auto container">
+      <div className="w-full h-auto md:h-screen bg-[#F1F5FA] py-4 mx-auto container">
         <div className="flex flex-row justify-between md:py-10 md:px-[140px]">
           <div className="mr-4 hidden md:block">
             <h1 className="text-[32px] fonnt-semibold w-[247px]">
