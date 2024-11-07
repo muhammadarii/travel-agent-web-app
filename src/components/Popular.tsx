@@ -89,7 +89,7 @@ const Popular = () => {
                 className="w-full h-full object-fill rounded-[16px]"
               />
               <div className="relative">
-                <div className="absolute bottom-5 left-1 md:left-5">
+                <div className="absolute bottom-2 left-2 md:left-5">
                   <p className="text-white text-[9px] md:text-[22px]">
                     {data[0].desc}
                   </p>
@@ -107,7 +107,7 @@ const Popular = () => {
                 className="w-full h-full object-fill rounded-[16px]"
               />
               <div className="relative">
-                <div className="absolute bottom-5 left-1 md:left-5">
+                <div className="absolute bottom-2 left-2 md:left-5">
                   <p className="text-white text-[9px] md:text-[22px]">
                     {data[1].desc}
                   </p>
@@ -127,7 +127,7 @@ const Popular = () => {
                 className="w-full h-full object-fill rounded-[16px]"
               />
               <div className="relative">
-                <div className="absolute bottom-5 left-1 md:left-5">
+                <div className="absolute bottom-2 left-2 md:left-5">
                   <p className="text-white text-[9px] md:text-[22px]">
                     {data[2].desc}
                   </p>
@@ -145,7 +145,7 @@ const Popular = () => {
                 className="w-full h-full object-fill rounded-[16px]"
               />
               <div className="relative">
-                <div className="absolute bottom-5 left-1 md:left-5">
+                <div className="absolute bottom-2 left-2 md:left-5">
                   <p className="text-white text-[9px] md:text-[22px]">
                     {data[3].desc}
                   </p>
