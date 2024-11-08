@@ -1,88 +1,113 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { FaPlane } from "react-icons/fa6";
+import { RiHotelBedFill } from "react-icons/ri";
+import { HiMenu, HiX } from "react-icons/hi";
 import Logo from "../assets/images/TravelBucks.png";
-import { Link } from "react-router-dom";
-import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 
 const Navbar: React.FC = () => {
-  const [nav, setNav] = useState<boolean>(false);
-  const navRef = useRef<HTMLDivElement>(null);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const handleNav = () => {
-    setNav(!nav);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   // Close menu if clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setNav(false);
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
   return (
-    <nav className="w-full fixed top-0 z-50 bg-white">
-      <div className="flex justify-between items-center w-full px-4 md:px-10 py-4">
-        {/* Logo */}
-        <img src={Logo} alt="Logo" width={150} />
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex text-[#898BA3] gap-10">
-          <Link to="/" onClick={() => setNav(false)}>
-            <p className="hover:text-[#222534] transition-colors">Home</p>
-          </Link>
-          <Link to="/about" onClick={() => setNav(false)}>
-            <p className="hover:text-[#222534] transition-colors">About Us</p>
-          </Link>
-          <Link to="/services" onClick={() => setNav(false)}>
-            <p className="hover:text-[#222534] transition-colors">Services</p>
-          </Link>
-          <Link to="/blog" onClick={() => setNav(false)}>
-            <p className="hover:text-[#222534] transition-colors">Blog</p>
-          </Link>
+    <div
+      className={`flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        isScrolled
+          ? "bg-black backdrop-blur-2xl bg-opacity-40"
+          : "bg-transparent"
+      }`}
+    >
+      {/* Desktop Menu */}
+      <div className="hidden md:flex gap-4 text-white items-center">
+        <div className="flex items-center gap-1 cursor-pointer hover:text-[#1F4AA8]">
+          <FaPlane className="w-[22px] h-[20px]" />
+          <p className="text-[14px]">Find Flight</p>
         </div>
-
-        {/* Contact Button (Visible on all screens) */}
-        <button className="bg-[#EFF3F8] w-[160px] h-[50px] rounded-md font-medium text-[#898BA3] hidden md:block hover:bg-[#1F4AA8] hover:text-white">
-          Contact Us
-        </button>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden" onClick={handleNav}>
-          <button className="text-[#898BA3] text-2xl">
-            {nav ? <HiOutlineXMark /> : <HiOutlineBars3 />}
-          </button>
+        <div className="flex items-center gap-1 cursor-pointer hover:text-[#1F4AA8]">
+          <RiHotelBedFill className="w-[23px] h-[21px]" />
+          <p className="text-[14px]">Find Stays</p>
         </div>
       </div>
 
-      {/* Mobile Nav */}
-      {nav && (
-        <div ref={navRef} className="md:hidden bg-white shadow-lg">
-          <div className="flex flex-col items-center text-[#898BA3] gap-5 py-6">
-            <Link to="/" onClick={handleNav}>
-              <p className="hover:text-[#222534] transition-colors">Home</p>
-            </Link>
-            <Link to="/about" onClick={handleNav}>
-              <p className="hover:text-[#222534] transition-colors">About Us</p>
-            </Link>
-            <Link to="/services" onClick={handleNav}>
-              <p className="hover:text-[#222534] transition-colors">Services</p>
-            </Link>
-            <Link to="/blog" onClick={handleNav}>
-              <p className="hover:text-[#222534] transition-colors">Blog</p>
-            </Link>
-            <button className="bg-[#EFF3F8] w-[160px] h-[50px] rounded-md font-medium text-[#898BA3] hover:bg-[#1F4AA8] hover:text-white">
-              Contact Us
-            </button>
+      {/* Logo */}
+      <div className="flex items-center cursor-pointer">
+        <img src={Logo} alt="Logo" className="w-[120px] md:w-[140px]" />
+      </div>
+
+      {/* Mobile Menu Button */}
+      <div className="md:hidden flex items-center">
+        <button onClick={toggleMobileMenu} className="text-white">
+          {isMobileMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+        </button>
+      </div>
+
+      {/* Desktop Buttons */}
+      <div className="hidden md:flex gap-4">
+        <button className="w-[100px] h-[40px] text-white rounded-md hover:text-[#1F4AA8]">
+          Login
+        </button>
+        <button className="w-[100px] h-[40px] bg-[#FFFFFF] text-black rounded-md hover:text-white hover:bg-[#1F4AA8]">
+          Sign Up
+        </button>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div
+          ref={menuRef}
+          className="md:hidden absolute top-[55px] left-0 right-0 bg-black bg-opacity-70 text-white py-4 space-y-4 flex flex-col items-center rounded-b-2xl"
+        >
+          <div className="flex items-center gap-1 cursor-pointer hover:text-[#1F4AA8]">
+            <FaPlane className="w-[22px] h-[20px]" />
+            <p className="text-[14px]">Find Flight</p>
           </div>
+          <div className="flex items-center gap-1 cursor-pointer hover:text-[#1F4AA8]">
+            <RiHotelBedFill className="w-[23px] h-[21px]" />
+            <p className="text-[14px]">Find Stays</p>
+          </div>
+          <button className="w-[100px] h-[40px] text-white rounded-md hover:text-[#1F4AA8]">
+            Login
+          </button>
+          <button className="w-[100px] h-[40px] bg-[#FFFFFF] text-black rounded-md hover:text-white hover:bg-[#1F4AA8]">
+            Sign Up
+          </button>
         </div>
       )}
-    </nav>
+    </div>
   );
 };
 

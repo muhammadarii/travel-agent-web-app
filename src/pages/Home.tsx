@@ -3,12 +3,14 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SponsorSlide from "../components/SponsorSlide";
 import Popular from "../components/Popular";
+import Header from "../components/Header";
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-16 md:mt-24">
+      <Header />
+      <div className="-mt-16 ">
         <Hero />
         <SponsorSlide />
         <Popular />
