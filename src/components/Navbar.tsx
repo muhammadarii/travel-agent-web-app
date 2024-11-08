@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
 
       {/* Desktop Buttons */}
       <div className="hidden md:flex gap-4">
-        <button className="w-[100px] h-[40px] text-white rounded-md hover:text-[#1F4AA8]">
+        <button className="w-[100px] h-[40px] text-white rounded-md">
           Login
         </button>
         <button className="w-[100px] h-[40px] bg-[#FFFFFF] text-black rounded-md hover:text-white hover:bg-[#1F4AA8]">
