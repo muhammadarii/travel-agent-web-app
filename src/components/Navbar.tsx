@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { FaPlane } from "react-icons/fa6";
 import { RiHotelBedFill } from "react-icons/ri";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX } from "react-icons/hi"; // Importing icons for menu toggle
 import Logo from "../assets/images/TravelBucks.png";
 import NavMobile from "./NavMobile";
 import { Link } from "react-router-dom";
 
-const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,25 +25,6 @@ const Navbar: React.FC = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Close menu if clicking outside of it
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    if (isMobileMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isMobileMenuOpen]);
-
   return (
     <div
       className={`flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
@@ -57,14 +37,14 @@ const Navbar: React.FC = () => {
       <div className="hidden md:flex gap-4 text-black items-center">
         <Link
           to="/flight-page"
-          className="flex items-center gap-1 cursor-pointer hover:text-[#1F4AA8]"
+          className="flex items-center gap-1 cursor-pointer hover:text-white"
         >
           <FaPlane className="w-[22px] h-[20px]" />
           <p className="text-[14px]">Find Flight</p>
         </Link>
         <Link
           to="/hotel-page"
-          className="flex items-center gap-1 cursor-pointer hover:text-[#1F4AA8]"
+          className="flex items-center gap-1 cursor-pointer hover:text-white"
         >
           <RiHotelBedFill className="w-[23px] h-[21px]" />
           <p className="text-[14px]">Find Stays</p>
@@ -85,20 +65,16 @@ const Navbar: React.FC = () => {
 
       {/* Desktop Buttons */}
       <div className="hidden md:flex gap-4">
-        <button className="w-[100px] h-[40px] text-black rounded-md">
+        <button className="w-[100px] h-[40px] text-black rounded-md hover:text-white">
           Login
         </button>
-        <button className="w-[100px] h-[40px] bg-[#FFFFFF] text-black rounded-md hover:text-white hover:bg-[#1F4AA8]">
+        <button className="w-[100px] h-[40px] bg-black text-white rounded-md hover:text-white hover:bg-[#1F4AA8]">
           Sign Up
         </button>
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <div ref={menuRef}>
-          <NavMobile />
-        </div>
-      )}
+      {isMobileMenuOpen && <NavMobile />}
     </div>
   );
 };
